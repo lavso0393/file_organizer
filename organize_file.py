@@ -16,17 +16,25 @@ categories = {"DOCUMENTS":DOCUMENTS, "VIDEO":VIDEO, "AUDIO":AUDIO, "PICTURES":PI
 
 files = [f for f in os.listdir(file_path) if isfile(join(file_path, f))]
 
-def organizer(file_path, file_type, folder_name= 'OTHERS'):
+def organizer(file_path, file_type=None, folder_name= 'OTHERS'):
     for file in files:
         print(type(file_path), type(folder_name))
         dest_path = file_path + folder_name
         archive = file.split('.')
-        if archive[-1].lower() in file_type:
+        if file_type ==None:
             if not isdir(dest_path):
                 os.mkdir(dest_path)
             src_path  = file_path + file
             dest_path += '/' + file
-            shutil.move(src_path, dest_path)  
+            shutil.move(src_path, dest_path) 
+        else:
+            if archive[-1].lower() in file_type:
+                if not isdir(dest_path):
+                    os.mkdir(dest_path)
+                src_path  = file_path + file
+                dest_path += '/' + file
+                shutil.move(src_path, dest_path)  
+
 
 for name, category in categories.items():
     organizer(file_path, category, name)

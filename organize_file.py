@@ -18,6 +18,7 @@ files = [f for f in os.listdir(file_path) if isfile(join(file_path, f))]
 
 def organizer(file_path, file_type, folder_name= 'OTHERS'):
     for file in files:
+        print(type(file_path), type(folder_name))
         dest_path = file_path + folder_name
         archive = file.split('.')
         if archive[-1].lower() in file_type:
@@ -27,7 +28,6 @@ def organizer(file_path, file_type, folder_name= 'OTHERS'):
             dest_path += '/' + file
             shutil.move(src_path, dest_path)  
 
-"""for name, category in categories.items():
-    organizer(files, category, str(name))"""
+for name, category in categories.items():
+    organizer(file_path, category, name)
 
-organizer(file_path, PICTURES, 'foto')
